@@ -53,7 +53,7 @@ npm run build
 log "Richte systemd-Service ein"
 sudo tee "/etc/systemd/system/$SERVICE.service" >/dev/null <<EOF
 [Unit]
-Description=Balloon Shooter
+Description=Balloonplatzer3001
 After=network.target
 
 [Service]
@@ -77,7 +77,7 @@ sudo systemctl restart "$SERVICE"
 sleep 1
 IP="$(hostname -I 2>/dev/null | awk '{print $1}')"
 echo
-echo "Balloon Shooter läuft auf http://${IP:-localhost}:${PORT}"
+echo "Balloonplatzer3001 läuft auf http://${IP:-localhost}:${PORT}"
 echo "Logs:    sudo journalctl -u $SERVICE -f"
 echo "Stoppen: sudo systemctl stop $SERVICE"
 echo "Scores:  $TARGET/data/scores.json"

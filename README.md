@@ -1,7 +1,7 @@
-# Balloon Shooter
+# Balloonplatzer3001
 
 Ein Low-Poly-Egoshooter im Browser: Du stehst in einer hügeligen Wiese, zielst mit dem
-Gewehr und schießt 60 Sekunden lang auf Ballons. Jede Farbe zählt anders, und nach
+Gewehr und lässt 60 Sekunden lang Ballons platzen. Jede Farbe zählt anders, und nach
 jeder Runde trägst du deinen Namen in die Rangliste ein.
 
 ## Starten

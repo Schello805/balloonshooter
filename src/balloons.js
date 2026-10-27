@@ -12,8 +12,9 @@ export const PALETTE = [
 
 const TOTAL_WEIGHT = PALETTE.reduce((sum, p) => sum + p.weight, 0);
 const BALLOON_COUNT = 27;
-const MIN_DISTANCE = 17;
-const SPAWN_DISTANCE = 22;
+const MIN_DISTANCE = 21;
+const SPAWN_DISTANCE = 30;
+const SPAWN_CLEAR = 34;
 const STRING_LENGTH = 2.2;
 
 function pickColor() {
@@ -51,13 +52,28 @@ export class BalloonField {
       const x = Math.cos(angle) * radius;
       const z = Math.sin(angle) * radius;
       if (Math.abs(x) > BOUNDS - 6 || Math.abs(z) > BOUNDS - 6) continue;
-      const dist = Math.hypot(x - this.player.position.x, z - this.player.position.z);
+      const dx = x - this.player.position.x;
+      const dz = z - this.player.position.z;
+      const dist = Math.hypot(dx, dz);
       if (dist < SPAWN_DISTANCE) continue;
+
+      const viewX = -Math.sin(this.player.yaw);
+      const viewZ = -Math.cos(this.player.yaw);
+      if (dist < SPAWN_CLEAR && (dx * viewX + dz * viewZ) / dist > 0.8) continue;
       const ground = heightAt(x, z);
       const height = 6 + Math.random() * 14;
       return new THREE.Vector3(x, ground + height, z);
     }
-    return new THREE.Vector3(30, heightAt(30, 30) + 14, 30);
+    let dirX = -this.player.position.x;
+    let dirZ = -this.player.position.z;
+    if (Math.hypot(dirX, dirZ) < 1) {
+      dirX = 1;
+      dirZ = 0;
+    }
+    const length = Math.hypot(dirX, dirZ);
+    const x = THREE.MathUtils.clamp(this.player.position.x + (dirX / length) * 42, -BOUNDS + 8, BOUNDS - 8);
+    const z = THREE.MathUtils.clamp(this.player.position.z + (dirZ / length) * 42, -BOUNDS + 8, BOUNDS - 8);
+    return new THREE.Vector3(x, heightAt(x, z) + 14, z);
   }
 
   spawn(initial = false) {

@@ -77,6 +77,6 @@ async function serveStatic(req, res) {
 }
 
 server.listen(port, () => {
-  console.log(`Balloon Shooter laeuft auf http://0.0.0.0:${port}`);
+  console.log(`Balloonplatzer3001 laeuft auf http://0.0.0.0:${port}`);
   console.log(`Rangliste: ${dataFile}`);
 });
