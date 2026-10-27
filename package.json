@@ -1,0 +1,20 @@
+{
+  "name": "balloon-shooter",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Low-poly first person balloon shooter - 60 seconds per round",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node server.js",
+    "serve": "npm run build && node server.js"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.5"
+  }
+}

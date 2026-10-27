@@ -13,3 +13,12 @@ Thumbs.db
 # PandaOS
 .claude/
 .pandaos/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Rangliste (Laufzeitdaten)
+data/

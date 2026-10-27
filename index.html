@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Balloon Shooter</title>
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div class="panel" id="score-panel">
+          <span class="label">Punkte</span>
+          <span class="value" id="score">0</span>
+        </div>
+        <div class="panel timer" id="timer-panel">
+          <span class="label">Zeit</span>
+          <span class="value" id="timer">60</span>
+        </div>
+      </div>
+
+      <div id="crosshair"><i></i><i></i></div>
+      <div id="popups"></div>
+      <div id="legend" class="panel"></div>
+
+      <div id="weapon-panel" class="panel">
+        <div class="weapon-row" data-index="0">
+          <span class="key">1</span>
+          <span class="wname">Präzision</span>
+          <span class="ammo">∞</span>
+        </div>
+        <div class="weapon-row" data-index="1">
+          <span class="key">2</span>
+          <span class="wname">Schnellfeuer</span>
+          <span class="ammo">30</span>
+        </div>
+      </div>
+      <div id="vignette"></div>
+      <div id="hitmarker"></div>
+    </div>
+
+    <div class="overlay" id="menu">
+      <div class="card">
+        <p class="eyebrow">60 Sekunden · Hügelwelt</p>
+        <h1>Balloon<span>Shooter</span></h1>
+        <p class="lead">
+          Zwei Gewehre, eine Hügelwelt, 60 Sekunden. Das Schnellfeuergewehr hat
+          genau 30 Schuss pro Runde — der Rest ist Präzision. Jede Ballonfarbe
+          zählt anders.
+        </p>
+        <ul class="keys">
+          <li><b>WASD</b> laufen</li>
+          <li><b>Maus</b> zielen</li>
+          <li><b>Linksklick</b> schießen</li>
+          <li><b>Halten</b> Dauerfeuer</li>
+          <li><b>1 / 2</b> Waffe wechseln</li>
+          <li><b>Rechtsklick</b> zoomen</li>
+          <li><b>Shift</b> sprinten</li>
+          <li><b>Leertaste</b> springen</li>
+        </ul>
+        <div class="menu-actions">
+          <button id="start-btn" class="primary">Runde starten</button>
+          <button id="ranking-btn" class="ghost">Rangliste</button>
+        </div>
+        <p class="hint" id="best-hint"></p>
+      </div>
+    </div>
+
+    <div class="overlay hidden" id="pause">
+      <div class="card small">
+        <p class="eyebrow">Pause</p>
+        <h2>Weiter?</h2>
+        <p class="lead">Klick, um die Runde fortzusetzen.</p>
+        <button id="resume-btn" class="primary">Weiterspielen</button>
+      </div>
+    </div>
+
+    <div class="overlay hidden" id="ranking">
+      <div class="card">
+        <p class="eyebrow">Bestenliste</p>
+        <h2>Rangliste</h2>
+        <div id="ranking-body" class="rank-list"></div>
+        <p class="rank-note" id="ranking-note"></p>
+        <button id="ranking-close" class="ghost">Zurück</button>
+      </div>
+    </div>
+
+    <div class="overlay hidden" id="over">
+      <div class="card">
+        <p class="eyebrow">Runde beendet</p>
+        <h2>Zeit abgelaufen</h2>
+        <div class="result">
+          <div>
+            <span class="label">Punkte</span>
+            <span class="big" id="final-score">0</span>
+          </div>
+          <div>
+            <span class="label">Ballons</span>
+            <span class="big" id="final-pops">0</span>
+          </div>
+          <div>
+            <span class="label">Bestwert</span>
+            <span class="big" id="final-best">0</span>
+          </div>
+        </div>
+        <p class="lead" id="final-joke"></p>
+
+        <div id="rank-entry" class="rank-entry hidden">
+          <label class="label" for="rank-name">Name für die Rangliste</label>
+          <div class="rank-input-row">
+            <input id="rank-name" type="text" maxlength="14" placeholder="Dein Name" autocomplete="off" spellcheck="false" />
+            <button id="rank-submit" class="primary compact">Eintragen</button>
+          </div>
+        </div>
+        <div id="rank-list" class="rank-list"></div>
+        <p class="rank-note" id="rank-note"></p>
+
+        <button id="again-btn" class="primary">Nochmal</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
