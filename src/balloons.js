@@ -2,12 +2,12 @@ import * as THREE from "three";
 import { heightAt, BOUNDS } from "./terrain.js";
 
 export const PALETTE = [
-  { id: "red", name: "Rot", color: "#ff4d5e", points: 100, weight: 34, size: 1.0, speed: 1.0 },
-  { id: "blue", name: "Blau", color: "#3fa9ff", points: 150, weight: 26, size: 0.95, speed: 1.1 },
-  { id: "green", name: "Grün", color: "#4ade80", points: 200, weight: 18, size: 0.88, speed: 1.15 },
-  { id: "yellow", name: "Gelb", color: "#f9e84a", points: 300, weight: 12, size: 0.8, speed: 1.25 },
-  { id: "purple", name: "Lila", color: "#a78bfa", points: 500, weight: 7, size: 0.72, speed: 1.35 },
-  { id: "gold", name: "Gold", color: "#ffb300", points: 750, weight: 3, size: 0.62, speed: 1.5 },
+  { id: "red", name: "Rot", color: "#ff4d5e", points: 100, weight: 34, speed: 1.0 },
+  { id: "blue", name: "Blau", color: "#3fa9ff", points: 150, weight: 26, speed: 1.1 },
+  { id: "green", name: "Grün", color: "#4ade80", points: 200, weight: 18, speed: 1.15 },
+  { id: "yellow", name: "Gelb", color: "#f9e84a", points: 300, weight: 12, speed: 1.25 },
+  { id: "purple", name: "Lila", color: "#a78bfa", points: 500, weight: 7, speed: 1.35 },
+  { id: "gold", name: "Gold", color: "#ffb300", points: 750, weight: 3, speed: 1.5 },
 ];
 
 const TOTAL_WEIGHT = PALETTE.reduce((sum, p) => sum + p.weight, 0);
@@ -16,6 +16,7 @@ const MIN_DISTANCE = 21;
 const SPAWN_DISTANCE = 30;
 const SPAWN_CLEAR = 34;
 const STRING_LENGTH = 2.2;
+const BALLOON_SIZE = 1.0;
 
 function pickColor() {
   let roll = Math.random() * TOTAL_WEIGHT;
@@ -91,11 +92,11 @@ export class BalloonField {
 
     const balloon = new THREE.Group();
     const body = new THREE.Mesh(sphereGeo, material);
-    body.scale.set(spec.size, spec.size * 1.18, spec.size);
+    body.scale.set(BALLOON_SIZE, BALLOON_SIZE * 1.18, BALLOON_SIZE);
     body.castShadow = true;
 
     const knot = new THREE.Mesh(knotGeo, material);
-    knot.position.y = -spec.size * 1.02;
+    knot.position.y = -BALLOON_SIZE * 1.02;
     knot.rotation.x = Math.PI;
 
     const stringMat = new THREE.LineBasicMaterial({
@@ -104,8 +105,8 @@ export class BalloonField {
       opacity: 0.45,
     });
     const stringGeo = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(0, -spec.size * 1.1, 0),
-      new THREE.Vector3(0, -spec.size * 1.1 - STRING_LENGTH, 0),
+      new THREE.Vector3(0, -BALLOON_SIZE * 1.1, 0),
+      new THREE.Vector3(0, -BALLOON_SIZE * 1.1 - STRING_LENGTH, 0),
     ]);
     const string = new THREE.Line(stringGeo, stringMat);
 
@@ -185,7 +186,7 @@ export class BalloonField {
     this.balloons = this.balloons.filter((b) => b !== entry);
     this.meshes = this.meshes.filter((m) => m.userData.entry !== entry);
 
-    this.burst(pos, entry.spec.color, entry.spec.size);
+    this.burst(pos, entry.spec.color, BALLOON_SIZE);
 
     const gen = this.generation;
     setTimeout(() => {

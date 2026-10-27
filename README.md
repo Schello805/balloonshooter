@@ -91,11 +91,12 @@ TARGET=/opt/balloon-shooter SERVICE=balloon-shooter bash update.sh
 | Rot | 100 | häufigster Ballon |
 | Blau | 150 | |
 | Grün | 200 | |
-| Gelb | 300 | kleiner, schneller |
+| Gelb | 300 | schneller |
 | Lila | 500 | selten |
-| Gold | 750 | kleinster, schnellster, leuchtet |
+| Gold | 750 | schnellster, leuchtet |
 
-Ballons halten immer mindestens 17 Meter Abstand zum Schützen, auch beim Abdriften.
+Alle Ballons sind gleich groß — der Unterschied ist nur die Entfernung. Sie halten
+immer mindestens 21 Meter Abstand zum Schützen, auch beim Abdriften.
 
 ## Aufbau
 
