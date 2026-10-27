@@ -41,6 +41,21 @@ PORT=9000 TARGET=/opt/balloon-shooter bash install.sh
 
 Logs: `sudo journalctl -u balloon-shooter -f` · Stoppen: `sudo systemctl stop balloon-shooter`
 
+## Update
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Schello805/balloonshooter/main/update.sh | bash
+```
+
+Holt den neuesten Stand, installiert Abhängigkeiten, baut neu und startet den
+systemd-Dienst neu (inklusive Health-Check auf der konfigurierten Port).
+
+Anderer Installationsordner oder Dienstname:
+
+```bash
+TARGET=/opt/balloon-shooter SERVICE=balloon-shooter bash update.sh
+```
+
 ## Befehle
 
 | Befehl | Zweck |
@@ -87,6 +102,7 @@ Ballons halten immer mindestens 17 Meter Abstand zum Schützen, auch beim Abdrif
 ```
 index.html            HUD, Menü-, Ranglisten- und Ergebnis-Overlays
 install.sh            Ein-Befehl-Installation für Debian (systemd)
+update.sh             Update per CLI: pull, build, Dienst neu starten
 server.js             Produktionsserver: dist/ plus Ranglisten-API
 server/api.js         GET/POST /api/scores mit Validierung und Rate-Limit
 server/store.js       JSON-Datei für die Rangliste
